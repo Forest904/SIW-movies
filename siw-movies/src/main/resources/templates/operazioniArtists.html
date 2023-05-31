@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Operazioni Artisti</title>
+  <link rel="stylesheet" href="/css/home_style.css" />
+</head>
+<body>
+	<header>
+		<div th:if="${#request.userPrincipal}">
+			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a href="/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/login">Login</a>
+		</div>
+	</header>
+	
+	<div><a href="/"><img src="/images/logo-siw.png" class="align-center"/></a></div>
+		
+		<h2>Operazioni su Artisti: </h2>
+		
+			
+		<form action="/artists" class = central_buttons_section>
+			<button onclick=""  class="button"> Mostra tutti i gli artisti </button>
+		</form>
+			
+		<form action="/formSearchArtists" class = central_buttons_section>
+			<button onclick=""  class="button"> Cerca artista per nome </button>
+		</form>
+
+</body>
+</html>

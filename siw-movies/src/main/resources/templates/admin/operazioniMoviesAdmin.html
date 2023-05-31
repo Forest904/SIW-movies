@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Operazioni Movies</title>
+  <link rel="stylesheet" href="/css/home_style.css" />
+</head>
+<body>
+	<header>
+		<div th:if="${#request.userPrincipal}">
+			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a href="/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/login">Login</a>
+		</div>
+	</header>
+	
+	<div><a href="/"><img src="/images/logo-siw.png" class="align-center"/></a></div>
+		
+		<h1>Consulta l'archivio di film</h1>
+
+		<form action="/movies" class = central_buttons_section>
+			<button onclick=""  class="button"> Mostra tutti i film </button>
+		</form>
+			
+		<form action="/formSearchMovies" class = central_buttons_section>
+			<button onclick=""  class="button"> Cerca film per anno </button>
+		</form>
+		
+		<h1>Operazioni per amministratore</h1>
+		
+		<form action="/admin/formNewMovie" class = central_buttons_section>
+			<button onclick=""  class="button"> Inserisci un film </button>
+		</form>
+		
+		<form action="/admin/gestisciMovies" class = central_buttons_section>
+			<button onclick=""  class="button"> Gestisci i film nel sistema </button>
+		</form>
+
+</body>
+</html>

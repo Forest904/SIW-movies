@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>New news</title>
+	<link rel="stylesheet" href="/css/home_style.css" />
+</head>
+<body>
+	<header>
+		<div th:if="${#request.userPrincipal}">
+			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a href="/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/login">Login</a>
+		</div>
+	</header>
+	
+	<div><a href="/"><img src="/images/logo-siw.png" class="align-center"/></a></div>
+	<h1>Crea una news</h1>
+	<form th:action="@{/admin/allNews}" method="POST" th:object="${news}">
+		<div class="divInForm">
+			<span th:text="${messaggioErrore}">Errore</span>
+		</div>
+		
+		<div class="divInForm">
+			<label for="title">Titolo:</label> <span><input required type="text" th:field="${news.title}" id="title"/></span>
+		</div>
+		
+		<div class="divInForm">
+			<label for="text">Contenuto:</label> <span><input required type="text" th:field="${news.text}" id="text"/></span>
+		</div>
+		
+		<div class="divInForm">
+			<span><button type="submit">Conferma</button></span>
+		</div>
+		
+	</form>
+</body>
+</html>

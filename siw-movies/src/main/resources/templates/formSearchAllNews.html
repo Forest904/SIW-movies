@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cerca News</title>
+	<link rel="stylesheet" href="/css/home_style.css" />
+</head>
+
+<body>
+	<header>
+		<div th:if="${#request.userPrincipal}">
+			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a href="/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/login">Login</a>
+		</div>
+	</header>
+	
+	<div><a href="/"><img src="/images/logo-siw.png" width="50%"/></a></div>
+	<h1>Cerca news per nome</h1>
+	<form th:action="@{/searchNews}" method="post">
+		<div>Titolo: <input type="text" th:value="${title}" name="title" /> </div>
+		
+		<div><input type="submit" /></div>
+		
+	</form>
+</body>
+
+</html>

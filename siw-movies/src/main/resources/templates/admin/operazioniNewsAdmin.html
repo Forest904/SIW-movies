@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Operazioni News</title>
+  <link rel="stylesheet" href="/css/home_style.css" />
+</head>
+<body>
+	<header>
+		<div th:if="${#request.userPrincipal}">
+			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a href="/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/login">Login</a>
+		</div>
+	</header>
+	
+	<div><a href="/"><img src="/images/logo-siw.png" class="align-center"/></a></div>
+		
+		<h1>Consulta l'archivio di news</h1>
+			
+		<form action="/allNews" class = central_buttons_section>
+			<button onclick=""  class="button"> Mostra tutte le news </button>
+		</form>
+		
+		<form action="/formSearchAllNews" class = central_buttons_section>
+			<button onclick=""  class="button"> Cerca una news per titolo </button>
+		</form>
+		
+		<h1>Operazioni per amministratore</h1>
+		
+		
+		<form action="/admin/formNewNews" class = central_buttons_section>
+			<button onclick=""  class="button"> Inserisci una nuova news </button>
+		</form>
+		
+		<!--  <form action="/gestisciMovies" class = central_buttons_section>
+			<button onclick=""  class="button"> Gestisci le news nel sistema </button>
+		</form>-->
+
+</body>
+</html>

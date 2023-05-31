@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Update Movie</title>
+	<link rel="stylesheet" href="/css/home_style.css" />
+</head>
+
+<body>
+	<header>
+		<div th:if="${#request.userPrincipal}">
+			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a href="/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/login">Login</a>
+		</div>
+	</header>
+	
+	<div><a href="/"><img src="/images/logo-siw.png" width="50%"/></a></div>
+    <h1>Modifica film </h1>
+    <div th:text="${movie.title} + ' (' + ${movie.year} + ')'">Up (2009)</div>
+    <div th:if="${movie.director}">
+    <span  th:text="'Regista:  ' + ${movie.director.name} + ' ' + ${movie.director.surname} +  ' (' + ${movie.director.dateOfBirth} + ')    '">Regista: Pete Docter (1965)</span>
+    <a th:href="@{'/admin/directorsToAdd' + '/' + ${movie.id}}">Cambia regista</a>
+    </div>
+    <div th:unless="${movie.director}"> Regista: mancante <a th:href="@{'/admin/directorsToAdd' + '/' + ${movie.id}}">Aggiungi regista</a></div>
+    
+    <div>Attori: <a th:href="@{'/admin/allActorsForMovie' + '/' + ${movie.id}}"><em>Modifica</em></a></div>
+  </body>
+</html>

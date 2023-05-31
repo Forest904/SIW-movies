@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+    	All the News
+    </title>
+	<link rel="stylesheet" href="/css/home_style.css" />
+</head>
+
+<body>
+	<header>
+		<div th:if="${#request.userPrincipal}">
+			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a href="/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/login">Login</a>
+		</div>
+	</header>
+	
+	<div><a href="/"><img src="/images/logo-siw.png" class="align-center"/></a></div>
+	<h1>All the News: </h1>
+	<div th:if="${allNews.isEmpty()}">Non ci sono news nel sistema, sorry</div>
+	<ul>
+		<li th:each="news : ${allNews}">
+			<a th:href="@{'/allNews' + '/' + ${news.id}}"
+				th:text="${news.title}">Elon Musk asks to stop AI's </a>
+		</li>
+	</ul>
+</body>
+</html>

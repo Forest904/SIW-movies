@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aggiungi regista</title>
+    <link rel="stylesheet" href="/css/home_style.css">
+</head>
+<body>
+	<header>
+		<div th:if="${#request.userPrincipal}">
+			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a href="/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/login">Login</a>
+		</div>
+	</header>
+	
+<h1 th:text="'Scegli un regista per ' + ${movie.title}">Scegli un solo regista per il film</h1>
+<div th:if="${directors.isEmpty()}">Non ci sono artisti nel sistema</div>
+<div>
+    <div th:each="director : ${directors}">
+        <a 	th:href="@{'/admin/addDirectorToMovie' + '/' + ${movie.id} + '/' + ${director.id}}" 
+        	th:text="${director.name} + ' ' + ${director.surname} +  ' (' + ${director.dateOfBirth} + ')'">Pete Docter (1965)
+        </a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			SiwMovie - Homepage
+		</title>
+		<link rel="stylesheet" href="/css/home_style.css" />
+	</head>
+	<body>
+		<header>
+		<div th:if="${#request.userPrincipal}">
+			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a href="/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/login">Login</a>
+		</div>
+	</header>
+	
+		<div><img src="/images/logo-siw.png" class="align-center"/></div>
+		<h1>Benvenuto nel progetto di S.I.W.</h1>
+		<h2>Ecco le categorie di operazioni attualmente in funzione:</h2>
+		
+		<section >
+			<div>
+				<form action="/operazioniMovies" class = central_buttons_section>
+					<button onclick=""  class="button"> Operazioni su movies </button>
+				</form>
+				
+				<form action="/operazioniArtists" class = central_buttons_section>
+					<button onclick=""  class="button"> Operazioni su artisti </button>
+				</form>
+			
+				<form action="/operazioniNews" class = central_buttons_section>
+					<button onclick=""  class="button"> Operazioni su news </button>
+				</form>
+			</div>
+			
+		</section>
+	</body>
+</html>
