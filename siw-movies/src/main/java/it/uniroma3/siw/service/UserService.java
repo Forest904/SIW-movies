@@ -1,12 +1,16 @@
 package it.uniroma3.siw.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
+import it.uniroma3.siw.model.Movie;
+import it.uniroma3.siw.model.Review;
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +25,9 @@ public class UserService {
     @Autowired
     protected UserRepository userRepository;
 
+    @Autowired
+    protected CredentialsService credentialsService;
+
     /**
      * This method retrieves a User from the DB based on its ID.
      * @param id the id of the User to retrieve from the DB
@@ -30,6 +37,31 @@ public class UserService {
     public User getUser(Long id) {
         Optional<User> result = this.userRepository.findById(id);
         return result.orElse(null);
+    }
+
+    @Transactional
+    public User getCurrentUser() {
+        User user = null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+
+            String username = authentication.getName();
+            user = credentialsService.getCredentials(username).getUser();
+        }
+        return user;
+    }
+
+
+    //check if a user can review a movie (max 1 review per movie)
+    public boolean canReview(User user, Movie movie){
+        for (Review review : user.getReviews()) {
+            if(review.getReviewedMovie().equals(movie)) return false;
+        }
+        return true;
+    }
+    @Transactional
+    public boolean alreadyExists(User user){
+        return userRepository.existsByNameAndSurnameAndEmail(user.getName(),user.getSurname(),user.getEmail());
     }
 
     /**

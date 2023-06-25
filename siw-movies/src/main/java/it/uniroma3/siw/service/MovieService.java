@@ -17,6 +17,7 @@ public class MovieService {
 	
 	@Autowired 
 	private MovieRepository movieRepository;
+
 	
 	@Transactional
 	public void updateMovie(Movie movie) {

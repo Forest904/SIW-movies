@@ -1,8 +1,6 @@
 package it.uniroma3.siw.model;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Objects;
+import java.util.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,24 +30,19 @@ public class Movie {
 	private Integer year;
 	private String urlImage;
 	
-	@OneToMany
-	private List<News> movieNews;
-
-	
-	
 	@ManyToOne(cascade = {CascadeType.ALL})
 	private Artist director;
-	
-	@OneToMany
-    @JoinColumn(name = "movie_id")
-    private List<News> news;
+
 	
     @ManyToMany(cascade = {CascadeType.ALL})
     private List<Artist> actors;
 
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "reviewedMovie")
+	private Set<Review> reviews;
+
     public Movie() {
-        this.news = new ArrayList<News>();
         this.actors = new ArrayList<Artist>();
+		this.reviews = new HashSet<>();
     }
 	
 	

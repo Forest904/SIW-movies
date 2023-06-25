@@ -1,4 +1,4 @@
-body { 
+body {
     font-family: "Times New Roman";
     color:black;
 }
@@ -16,11 +16,11 @@ div.divInForm{
 
 h1{
 	text-align: center;
-	font-size: 48;
+	font-size: 48px;
 }
 
 h2{
-	font-size: 24;
+	font-size: 24px;
 }
 
 section{
@@ -28,11 +28,6 @@ section{
 	margin-left: 30px;
 	margin-right: 30px;
 }
-
-.central_buttons_section{
-	align-self: center;
-}
-
 
 .button {
   padding: 16px 32px;
@@ -43,8 +38,6 @@ section{
   transition-duration: 0.5s;
   cursor: pointer;
 }
-
-
 
 .button {
   background-color: white; 
@@ -60,14 +53,14 @@ section{
 header {
   background-color: rgb(98, 192, 144);
   color: white;
-  height: 1.5em;
-  margin-bottom: 0.5em;
-  padding: 0.2em;
-  text-align: right; 
+  height: 48px;
+  text-align: right;
+    padding-right: 15px;
+    padding-top: 12px;
 }
 
 header a { 
 	text-decoration: none; 
     color: white;
-    font-size: 0.6em;
+    font-size: 24px;
 }
