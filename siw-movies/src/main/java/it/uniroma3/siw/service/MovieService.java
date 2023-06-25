@@ -1,16 +1,20 @@
 package it.uniroma3.siw.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import it.uniroma3.siw.controller.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.model.Movie;
 import it.uniroma3.siw.repository.MovieRepository;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class MovieService {
@@ -47,5 +51,13 @@ public class MovieService {
             result.add(movie);
         return result;
     }
+
+	public void addImageToMovie(Movie movie, MultipartFile multipartFile) throws IOException {
+		//questa linea è necessaria per evitare attacchi di iniezione di codice attraverso il nome del file
+		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+		movie.setImageFileName(fileName);
+		String uploadDir = "src/main/upload/images/moviesImages/";
+		FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+	}
 
 }

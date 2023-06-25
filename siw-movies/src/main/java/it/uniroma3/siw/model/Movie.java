@@ -23,6 +23,8 @@ public class Movie {
     private Long id;
     @NotBlank
 	private String title;
+
+	private String imageFileName;
     
     @NotNull
     @Min(1900)
@@ -96,6 +98,35 @@ public class Movie {
         this.actors.add(actor);
         actor.getMoviesActedIn().add(this);
     }
+
+	public String getAvgReviews(){
+		int sum=0;
+		if (reviews.size()==0) return "00";
+		for (Review r:
+				reviews) {
+			sum += r.getScore();
+		}
+		int res = sum/reviews.size();
+
+		if(res<10) return "0"+res;
+
+		return "" + res;
+	}
+	public Set<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(Set<Review> reviews) {
+		this.reviews = reviews;
+	}
+
+	public String getImageFileName() {
+		return imageFileName;
+	}
+
+	public void setImageFileName(String imageFileName) {
+		this.imageFileName = imageFileName;
+	}
 	
 	@Override
 	public int hashCode() {
@@ -113,4 +144,5 @@ public class Movie {
 		Movie other = (Movie) obj;
 		return Objects.equals(title, other.title) && year == other.year;
 	}
+
 }

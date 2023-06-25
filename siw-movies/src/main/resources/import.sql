@@ -18,10 +18,3 @@ insert into movie (id, title, url_image, YEAR) values(nextval('hibernate_sequenc
 insert into movie (id, title, url_image, YEAR) values(nextval('hibernate_sequence'), 'Lo chiamavano Jeeg Robot', 'https://www.rai.it/dl/img/2016/02/23/1280x720_1456237082397_jeegrobot.jpg',2015);
 insert into movie (id, title, url_image, YEAR) values(nextval('hibernate_sequence'), 'Yesterday', 'https://citynews-today.stgy.ovh/~media/horizontal-mid/20648620006811/yesterday-film-poster-movie-universal-pictures-2.jpg',2019);
 
-
-INSERT INTO news(id, title, publishing_date, text) values(nextval('hibernate_sequence'), 'Elon Musk', '1976-11-07', 'Elon Musk dies on Mars' );
-INSERT INTO news(id, title, publishing_date, text) values(nextval('hibernate_sequence'), 'Sus', '1976-11-07', 'Elon Musk dies on Mars' );
-INSERT INTO news(id, title, publishing_date, text) values(nextval('hibernate_sequence'), 'Sas', '1976-11-07', 'Elon Musk dies on Mars' );
-INSERT INTO news(id, title, publishing_date, text) values(nextval('hibernate_sequence'), 'Bab', '1976-11-07', 'Elon Musk dies on Mars' );
-INSERT INTO news(id, title, publishing_date, text) values(nextval('hibernate_sequence'), 'Cat', '1976-11-07', 'Elon Musk dies on Mars' );
-INSERT INTO news(id, title, publishing_date, text) values(nextval('hibernate_sequence'), 'Dogg', '1976-11-07', 'Elon Musk dies on Mars' );

@@ -1,11 +1,16 @@
 package it.uniroma3.siw.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.LinkedList;
+import java.util.Objects;
 import javax.validation.Valid;
+
+import it.uniroma3.siw.controller.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,6 +22,7 @@ import it.uniroma3.siw.model.Movie;
 import it.uniroma3.siw.service.ArtistService;
 import it.uniroma3.siw.service.MovieService;
 import it.uniroma3.siw.validator.MovieValidator;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class MovieController {
@@ -59,19 +65,36 @@ public class MovieController {
     }
     
     @PostMapping(value="/admin/movies")
-    public String newMovie(@Valid @ModelAttribute("movie") Movie movie, BindingResult bindingResult, Model model) {
+    public String newMovie(@RequestParam("image") MultipartFile multipartFile, @Valid @ModelAttribute("movie") Movie movie, BindingResult bindingResult, Model model) {
         this.movieValidator.validate(movie, bindingResult);
-        if (!bindingResult.hasErrors()) {
-        	
+        if (!bindingResult.hasErrors() && !multipartFile.isEmpty()) {
+            try{
+                movieService.addImageToMovie(movie, multipartFile);
+            } catch (IOException e) {
+                model.addAttribute("erroreUpload", "Errore nel caricamento dell'immagine");
+                return returnToFormNewMovie(model);
+            }
+
+            if(movie.getDirector() != null){
+                movie.getDirector().getDirectedMovies().add(movie);
+            }
+
             this.movieService.updateMovie(movie);
             model.addAttribute("movie", movie);
             return "movie.html";
         } else {
             model.addAttribute("messaggioErrore", "Questo film esiste già, inseriscine uno nuovo :)");
-            return "admin/formNewMovie.html";
+            return returnToFormNewMovie(model);
         }
     }
-    
+
+
+    //we need this to return to the form with the error messages, and eliminate duplicate code
+    public String returnToFormNewMovie(Model model){
+        if(artistService.getAllArtists().size() != 0)
+            model.addAttribute("directors", artistService.getAllArtists());
+        return "admin/formNewMovie.html";
+    }
     
     @GetMapping("/movies")
 	public String showMovies(Model model) {
@@ -191,4 +214,5 @@ public class MovieController {
         model.addAttribute("movie", movie);
         return "admin/formUpdateMovies.html";
     }
+
 }

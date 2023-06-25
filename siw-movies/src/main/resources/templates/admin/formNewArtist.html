@@ -9,15 +9,8 @@
 </head>
 
 <body>
-	<header>
-		<div th:if="${#request.userPrincipal}">
-			<span th:text="${#request.userPrincipal.principal.username}"></span>
-			<a href="/logout">Logout</a>
-		</div>
-		<div th:unless="${#request.userPrincipal}">
-			<a href="/login">Login</a>
-		</div>
-	</header>
+	<div th:replace="fragments/header :: header"></div>
+
 	<div><a href="/"><img src="/images/logo-siw.png" class="align-center"/></a></div>
 	<h1>Aggiungi un artista</h1>
 	<h2>Può essere un attore, un regista o entrambi è indifferente</h2>
@@ -27,19 +20,19 @@
 		</div>
 		
 		<div class="divInForm">
-			<label for="NomeArtista">Nome dell'artista:</label> <span><input required type="text" th:field="${artist.name}"/></span>
+			<label>Nome dell'artista:</label> <span><input required type="text" th:field="${artist.name}"/></span>
 		</div>
 		
 		<div class="divInForm">
-			<label for="CognomeArtista">Cognome dell'artista:</label> <span><input required type="text" th:field="${artist.surname}"/></span>
+			<label>Cognome dell'artista:</label> <span><input required type="text" th:field="${artist.surname}"/></span>
 		</div>
 
 		<div class="divInForm">
-			<label for="AnnoNascita">Anno di nascita dell'artista "yyyy-MM-dd" :</label> <span><input type="text" th:field="${artist.dateOfBirth}" /></span>
+			<label>Anno di nascita dell'artista "yyyy-MM-dd" :</label> <span><input type="text" th:field="${artist.dateOfBirth}" /></span>
 		</div>
 		
 		<div class="divInForm">
-			<label for="nazionalità">Nazionalità dell'artista:</label> <span><input type="text" th:field="${artist.nationality}"  /></span>
+			<label>Nazionalità dell'artista:</label> <span><input type="text" th:field="${artist.nationality}"  /></span>
 		</div>
 		
 		<!-- <label>Scegli un regista:</label>

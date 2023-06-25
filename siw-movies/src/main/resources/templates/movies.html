@@ -7,25 +7,40 @@
 </head>
 
 <body>
-	<header>
-		<div th:if="${#request.userPrincipal}">
-			<span th:text="${#request.userPrincipal.principal.username}"></span>
-			<a href="/logout">Logout</a>
-		</div>
-		<div th:unless="${#request.userPrincipal}">
-			<a href="/login">Login</a>
-		</div>
-	</header>
+	<div th:replace="fragments/header :: header"></div>
 	
 	<div><a href="/"><img src="/images/logo-siw.png" class="align-center"/></a></div>
-	<h1>Film</h1>
+
 	<div th:if="${movies == null || movies.isEmpty()}">Non ci sono film nel sistema</div>
+
+	<!--FILM-->
+	<div class="movies-container">
+            <span class="carousel-header">
+                <span class="carousel-title">Film</span>
+            </span>
+		<div class="emptyList" th:if="${movies.isEmpty()}">Non c'è ancora nessun film</div>
+		<div class="carousel">
+			<!-- ADD MOVIE CARD -->
+
+			<span class="card" th:each="movie : ${movies}" th:unless="${movies.isEmpty()}" th:data-title="${movie.title}">
+                    <a th:href="@{'/movies/' + ${movie.id}}">
+                        <!--<img class="card" width="100%" src=${movie.urlImage} alt="image"/>-->
+
+                    <span class="card-info" th:text="${movie.title}">Movie</span><br>
+                    <span class="card-info" id="movie-year" th:text="${movie.year}">1990</span>
+					</a>
+                </span>
+		</div>
+	</div>
+
+	<!--
 	<ul>
 		<li th:each="movie : ${movies}">
 			<a th:href="@{'/movies' + '/' + ${movie.id}}"
 				th:text="${movie.title} + ' (' + ${movie.year} + ')'">Up! (2000)</a>
 		</li>
 	</ul>
+	-->
 </body>
 
 </html>

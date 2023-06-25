@@ -9,34 +9,34 @@
 </head>
 
 <body>
-	<header>
-		<div th:if="${#request.userPrincipal}">
-			<span th:text="${#request.userPrincipal.principal.username}"></span>
-			<a href="/logout">Logout</a>
-		</div>
-		<div th:unless="${#request.userPrincipal}">
-			<a href="/login">Login</a>
-		</div>
-	</header>
+	<div th:replace="fragments/header :: header"></div>
 	
 	<div><a href="/"><img src="/images/logo-siw.png" class="align-center"/></a></div>
 	<h1>Aggiungi un film</h1>
-	<form th:action="@{/admin/movies}" method="POST" th:object="${movie}">
+	<form th:action="@{/admin/movies}" method="POST" th:object="${movie}" enctype="multipart/form-data">
+
 		<div class="divInForm">
 			<span th:text="${messaggioErrore}">Errore</span>
 		</div>
+
+		<div class="errorMessage" th:if="${erroreUpload}" th:text="${erroreUpload}">errore</div>
 		
 		<div class="divInForm">
-			<label for="titolo">Titolo del film:</label> <span><input required type="text" th:field="${movie.title}" id="titolo"/></span>
+			<label>Titolo del film:</label> <span><input required type="text" th:field="${movie.title}" id="titolo"/></span>
 		</div>
 
 		<div class="divInForm">
-			<label for="anno">Anno di uscita:</label> <span><input required type="text" th:field="${movie.year}" id="anno"/></span>
+			<label>Anno di uscita:</label> <span><input required type="text" th:field="${movie.year}" id="anno"/></span>
 		</div>
-		
-		<div class="divInForm">
-			<label for="urlImmagine">URL immagine di copertina:</label> <span><input type="url" th:field="${movie.urlImage}" id="urlImmagine" /></span>
-		</div>
+
+		<label>Scegli un regista:</label>
+		<span th:unless="${directors}"> non ci sono artisti da poter scegliere</span>
+		<select required th:field="${movie.director}" th:if="${directors}">
+			<option th:each="director : ${directors}" th:value="${director.id}" th:text="${director.name} + ' ' + ${director.surname}"></option>
+		</select>
+
+		<label>Immagine:</label>
+		<input id="image" required type="file" name="image" accept="image/*"/>
 		
 		<div class="divInForm">
 			<span><button id="submitButton" type="submit">Conferma inserimento</button></span>

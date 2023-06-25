@@ -7,17 +7,9 @@
 		<link rel="stylesheet" href="/css/home_style.css" />
 	</head>
 	<body>
-		<header>
-		<div th:if="${#request.userPrincipal}">
-			<span th:text="${#request.userPrincipal.principal.username}"></span>
-			<a href="/logout">Logout</a>
-		</div>
-		<div th:unless="${#request.userPrincipal}">
-			<a href="/login">Login</a>
-		</div>
-		</header>
+	<div th:replace="fragments/header :: header"></div>
 
-		<div><img src="/images/logo-siw.png" class="align-center"/></div>
+		<div><img src="/images/logo-siw.png" class="align-center" alt="logo"/></div>
 		<h1>Benvenuto nel progetto di S.I.W.</h1>
 		<h2>Ecco le categorie di operazioni attualmente in funzione:</h2>
 		
@@ -35,8 +27,6 @@
 					<button onclick=""  class="button"> Operazioni su news </button>
 				</form>
 			</div>
-			
-			<img src="">
 			
 		</section>
 	</body>

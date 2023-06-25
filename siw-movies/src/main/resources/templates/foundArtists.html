@@ -7,15 +7,7 @@
 </head>
 
 <body>
-	<header>
-		<div th:if="${#request.userPrincipal}">
-			<span th:text="${#request.userPrincipal.principal.username}"></span>
-			<a href="/logout">Logout</a>
-		</div>
-		<div th:unless="${#request.userPrincipal}">
-			<a href="/login">Login</a>
-		</div>
-	</header>
+	<div th:replace="fragments/header :: header"></div>
 	
 	<div><a href="/"><img src="/images/logo-siw.png" class="align-center"/></a></div>
 	<h1>Artisti trovati:</h1>
