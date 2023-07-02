@@ -215,4 +215,18 @@ public class MovieController {
         return "admin/formUpdateMovies.html";
     }
 
+    @PostMapping("/saveMovieImage/{id}")
+    public String saveMovieImage(@PathVariable("id") Long id,
+                                 @RequestParam("image") MultipartFile multipartFile, Model model) throws IOException {
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
+        Movie movie = movieService.getMovie(id);
+        if(movie == null) return "errors/movieNotFoundError";
+
+        movie.setPicFilename(fileName);
+        movieService.updateMovie(movie);
+        String uploadDir = "src/main/upload/images/movie_pics/" + movie.getId();
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        return "redirect:/movie/"+ id;
+    }
+
 }

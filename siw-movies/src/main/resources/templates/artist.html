@@ -8,7 +8,6 @@
 <body>
 	<div th:replace="fragments/header :: header"></div>
 
-	<div><a href="/"><img src="/images/logo-siw.png" width="50%"/></a></div>
     <h1>Dettagli Artista</h1>
     <div th:if="${artist}">
         <span th:text="${artist.name} + ' ' + ${artist.surname}">Tom Hanks</span>

@@ -51,20 +51,7 @@ section{
     color: white;
 }
 
-header {
-    background-color: rgb(63, 136, 197);
-    color: white;
-    height: 48px;
-    display: flex;
-    justify-content: space-between;
-    padding: 15px;
-    font-size: 24px;
-}
 
-header a {
-    color: white;
-    font-size: 24px;
-}
 
 
 .container {

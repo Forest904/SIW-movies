@@ -8,8 +8,6 @@
 
 <body>
 	<div th:replace="fragments/header :: header"></div>
-	
-	<div><a href="/"><img src="/images/logo-siw.png" class="align-center"/></a></div>
 
 	<div th:if="${movies == null || movies.isEmpty()}">Non ci sono film nel sistema</div>
 

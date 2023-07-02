@@ -5,12 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -23,6 +18,9 @@ public class Artist {
     private String name;
     private String surname;
     private String nationality;
+
+    @Column(nullable = true, length = 64)
+    private String picFilename;
     
     @DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateOfBirth;
@@ -105,6 +103,14 @@ public class Artist {
 
     public void setMoviesActedIn(List<Movie> moviesActedIn) {
         this.moviesActedIn = moviesActedIn;
+    }
+
+    public String getPicFilename() {
+        return picFilename;
+    }
+
+    public void setPicFilename(String picFilename) {
+        this.picFilename = picFilename;
     }
 }
 

@@ -14,6 +14,9 @@ public class User {
 	private String surname;
 	private String email;
 
+	@Column(nullable = true, length = 64)
+	private String picFilename;
+
 	@ManyToMany(cascade = CascadeType.ALL)
 	private Set<Movie> watchList;
 	@OneToMany(mappedBy = "author")
@@ -26,6 +29,13 @@ public class User {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	public String getPicPath(){
+		if(picFilename != null) return "/upload/images/user_pics/" + this.getId() + "/"
+				+this.getPicFilename();
+		return "/images/default_profile_pic.png";
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -64,5 +74,13 @@ public class User {
 
 	public void setReviews(Set<Review> reviews) {
 		this.reviews = reviews;
+	}
+
+	public String getPicFilename() {
+		return picFilename;
+	}
+
+	public void setPicFilename(String picFilename) {
+		this.picFilename = picFilename;
 	}
 }

@@ -1,15 +1,8 @@
 package it.uniroma3.siw.model;
 
+
 import java.util.*;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -30,7 +23,11 @@ public class Movie {
     @Min(1900)
     @Max(2023)
 	private Integer year;
-	private String urlImage;
+
+
+
+	@Column(nullable = true, length = 64)
+	private String picFilename;
 	
 	@ManyToOne(cascade = {CascadeType.ALL})
 	private Artist director;
@@ -46,8 +43,13 @@ public class Movie {
         this.actors = new ArrayList<Artist>();
 		this.reviews = new HashSet<>();
     }
-	
-	
+
+	public String getPicPath(){
+		if(picFilename != null) return "/upload/images/movie_pics/" + this.getId() + "/"
+				+this.getPicFilename();
+		return "/images/default_profile_pic.png";
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -70,14 +72,7 @@ public class Movie {
 	public void setYear(Integer year) {
 		this.year = year;
 	}
-	
-	public String getUrlImage() {
-		return urlImage;
-	}
 
-	public void setUrlImage(String urlImage) {
-		this.urlImage = urlImage;
-	}
 	
 	public Artist getDirector() {
         return director;
@@ -126,6 +121,14 @@ public class Movie {
 
 	public void setImageFileName(String imageFileName) {
 		this.imageFileName = imageFileName;
+	}
+
+	public String getPicFilename() {
+		return picFilename;
+	}
+
+	public void setPicFilename(String picFilename) {
+		this.picFilename = picFilename;
 	}
 	
 	@Override
