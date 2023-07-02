@@ -2,18 +2,39 @@
 <html>
   <head>
     <title>Artista</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="/css/home_style.css" />
 </head>
 
 <body>
 	<div th:replace="fragments/header :: header"></div>
 
-    <h1>Dettagli Artista</h1>
-    <div th:if="${artist}">
-        <span th:text="${artist.name} + ' ' + ${artist.surname}">Tom Hanks</span>
-        <span th:text="'(' + ${artist.dateOfBirth} + ')'">20/20/2000</span>
-        <span th:text="${artist.nationality}">United States</span>
+    <div class="container my-3" th:if="${artist}">
+        <div class="row">
+            <h1>Dettagli Artista</h1>
+            <!-- Colonna immagine artista -->
+            <div class="col-md-3">
+                <form class="" th:action="@{'/admin/saveArtistImage/'+${artist.id}}" method="POST" enctype="multipart/form-data">
+                    <label class="cursor-pointer text-light" for="modifyImage">
+                        <img class="img-fluid my-2 rounded-5 border border-2 border-primary px-0"
+                             src="https://pad.mymovies.it/filmclub/2006/04/020/locandina.jpg"/>
+                    </label>
+                    <input class="opacity-0" id="modifyImage" name="image" type="file" accept="image/*" onchange="form.submit()">
+                </form>
+            </div>
+
+            <!--Colonna info artista-->
+            <div class="col-md-4 my-3">
+                <h2 th:text="${artist.name} + ' ' + ${artist.surname}">Tom Hanks</h2>
+                <div>Anno di nascita: <span th:text="'(' + ${artist.dateOfBirth} + ')'">2001-12-12</span></div>
+                <div>Nazionalita: <span th:text="${artist.nationality}">United States</span></div>
+            </div>
+        </div>
     </div>
-    <div th:unless="${artist}">Non esiste</div>
+    <div th:unless="${artist}">Artista non nel sistema</div>
+
+    <!-- <img class="img-fluid my-2 rounded-5 border border-2 border-primary px-0" th:src= "${movie.getPicPath()}"/> -->
+
   </body>
 </html>

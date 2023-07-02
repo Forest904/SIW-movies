@@ -2,32 +2,60 @@
 <html>
   <head>
     <title>Film</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="/css/home_style.css" />
 </head>
 
 <body>
 	<div th:replace="fragments/header :: header"></div>
-	
-	<div><a href="/"><img src="/images/logo-siw.png" width="50%"/></a></div>
-    <div th:if="${movie}">
-	    <h1 th:text="${movie.title}">Dettagli Film</h1>
-        <div>Anno: <span th:text="'(' + ${movie.year} + ')'">2000</span></div>
-        <div th:if="${movie.director}">Regista: <span th:text="${movie.director.name} + ' ' + ${movie.director.surname}">Tom Hanks</span></div>
-        <div th:unless="${movie.director}">Regista: non specificato</div>
-        
-        <h2>Attori presenti nel film:</h2>
-    	<div th:each="actor : ${cast}">
-      <a  th:href="@{'/artists' + '/' + ${actor.id}}">
-      <span  th:text="${actor.name} + ' ' + ${actor.surname} + ':   -   '">Pete Docter</span></a>
-    	</div>
 
-        <form class="" th:action="@{'/admin/saveMovieImage/'+${movie.id}}" method="POST" enctype="multipart/form-data">
-            <label class="cursor-pointer text-light" for="modifyImage">
-                <img class="img-fluid my-2 rounded-5 border border-2 border-primary px-0 shadow z-0 hover-dark" th:src= "${movie.getPicPath()}"/>
-            </label>
-            <input class="opacity-0" id="modifyImage" name="image" type="file" accept="image/*" onchange="form.submit()">
-        </form>
+
+    <div class="container my-3" th:if="${movie}">
+        <div class="row">
+
+            <!-- Colonna locandina -->
+            <div class="col-md-3">
+                <form class="" th:action="@{'/admin/saveMovieImage/'+${movie.id}}" method="POST" enctype="multipart/form-data">
+                    <label class="cursor-pointer text-light" for="modifyImage">
+                        <img class="img-fluid my-2 rounded-5 border border-2 border-primary px-0"
+                             src="https://pad.mymovies.it/filmclub/2006/04/020/locandina.jpg"/>
+                    </label>
+                    <input class="opacity-0" id="modifyImage" name="image" type="file" accept="image/*" onchange="form.submit()">
+                </form>
+            </div>
+
+            <!--Colonna info film-->
+            <div class="col-md-4 my-3">
+                <h2 th:text="${movie.title}">Up </h2>
+                <div th:if="${movie.director}">Regista: <span th:text="${movie.director.name} + ' ' + ${movie.director.surname}">Tom Hanks</span></div>
+                <div>Anno: <span th:text="'(' + ${movie.year} + ')'">2001</span></div>
+                <h2>Attori presenti nel film:</h2>
+                <div th:each="actor : ${cast}">
+                    <a  th:href="@{'/artists' + '/' + ${actor.id}}">
+                        <span  th:text="${actor.name} + ' ' + ${actor.surname} + ':   -   '">Pete Docter</span></a>
+                </div>
+            </div>
+
+            <!--Colonna recensioni -->
+            <div class="col-md-5 my-4">
+                <h3>Recensioni</h3>
+                <div class="scrollable-list">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Recensione 1</h5>
+                            <p class="card-text">Questa è la descrizione della recensione 1.</p>
+                        </div>
+                    </div>
+
+                    <!-- Aggiungi altre cards di recensioni qui -->
+                </div>
+            </div>
+        </div>
     </div>
-    <div th:unless="${movie}">Non esiste</div>
+    <div th:unless="${movie}">Il film selezionato non esiste</div>
+
+    <!-- <img class="img-fluid my-2 rounded-5 border border-2 border-primary px-0" th:src= "${movie.getPicPath()}"/> -->
+
   </body>
 </html>

@@ -8,8 +8,8 @@
 </head>
 <body>
 
-<nav th:fragment="header" class="navbar navbar-expand-sm navbar-light " style="background-color: lightblue" >
-    <div class="container" >
+<nav th:fragment="header" class="navbar navbar-expand-sm navbar-light" style="background-color: lightblue" >
+    <div class="container " >
 
         <!-- LOGO ICON
 
@@ -44,11 +44,11 @@
                 <li class="nav-item" th:if="${userAuthDetails}">
                     <a class="nav-link" href="/profile">Profile</a>
                 </li>
-
             </ul>
-
-            <!-- PROFILE SECTION -->
         </div>
+
+        <!-- PROFILE SECTION -->
+
         <div class="d-flex justify-content-center">
             <div th:if="${userAuthDetails}" class="flex-shrink-0 dropdown">
                 <a class="d-block link-body-emphasis text-decoration-none dropdown-toggle text-light" data-bs-toggle="dropdown" aria-expanded="false">
