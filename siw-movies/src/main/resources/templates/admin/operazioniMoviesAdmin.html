@@ -10,29 +10,33 @@
 <body>
 	<div th:replace="fragments/header :: header"></div>
 
-		<h1>Consulta l'archivio di film</h1>
+	<div class="container">
 
-	<section>
-		<form action="/movies" class = central_buttons_section>
-			<button onclick=""  class="button"> Mostra tutti i film </button>
-		</form>
-			
-		<form action="/formSearchMovies" class = central_buttons_section>
-			<button onclick=""  class="button"> Cerca film per anno </button>
-		</form>
-	</section>
+		<h1 class="m-4">Consulta l'archivio di film</h1>
 
-		<h1>Operazioni per amministratore</h1>
+		<section>
+			<form action="/movies" class = central_buttons_section>
+				<button onclick=""  class="button"> Mostra tutti i film </button>
+			</form>
 
-	<section>
-		<form action="/admin/formNewMovie" class = central_buttons_section>
-			<button onclick=""  class="button"> Inserisci un film </button>
-		</form>
-		
-		<form action="/admin/gestisciMovies" class = central_buttons_section>
-			<button onclick=""  class="button"> Gestisci i film nel sistema </button>
-		</form>
-	</section>
+			<form action="/formSearchMovies" class = central_buttons_section>
+				<button onclick=""  class="button"> Cerca film per anno </button>
+			</form>
+		</section>
+
+		<h1 class="m-4">Operazioni per amministratore</h1>
+
+		<section>
+			<form action="/admin/formNewMovie" class = central_buttons_section>
+				<button onclick=""  class="button"> Inserisci un film </button>
+			</form>
+
+			<form action="/admin/gestisciMovies" class = central_buttons_section>
+				<button onclick=""  class="button"> Gestisci i film nel sistema </button>
+			</form>
+		</section>
+	</div>
+
 
 </body>
 </html>

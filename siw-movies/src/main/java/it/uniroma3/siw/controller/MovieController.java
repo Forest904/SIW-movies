@@ -63,26 +63,15 @@ public class MovieController {
         model.addAttribute("movie", movie);
         return "admin/formNewMovie.html";
     }
-    
-    @PostMapping(value="/admin/movies")
-    public String newMovie(@RequestParam("image") MultipartFile multipartFile, @Valid @ModelAttribute("movie") Movie movie, BindingResult bindingResult, Model model) {
-        this.movieValidator.validate(movie, bindingResult);
-        if (!bindingResult.hasErrors() && !multipartFile.isEmpty()) {
-            try{
-                movieService.addImageToMovie(movie, multipartFile);
-            } catch (IOException e) {
-                model.addAttribute("erroreUpload", "Errore nel caricamento dell'immagine");
-                return returnToFormNewMovie(model);
-            }
 
-            if(movie.getDirector() != null){
-                movie.getDirector().getDirectedMovies().add(movie);
-            }
-
+    @PostMapping("/admin/movies")
+    public String newMovie(@Valid @ModelAttribute("movie") Movie movie, BindingResult bindingResult, Model model){
+        movieValidator.validate(movie, bindingResult);
+        if(!bindingResult.hasErrors()){
             this.movieService.updateMovie(movie);
             model.addAttribute("movie", movie);
-            return "movie.html";
-        } else {
+            return "movie";
+        }else {
             model.addAttribute("messaggioErrore", "Questo film esiste già, inseriscine uno nuovo :)");
             return returnToFormNewMovie(model);
         }

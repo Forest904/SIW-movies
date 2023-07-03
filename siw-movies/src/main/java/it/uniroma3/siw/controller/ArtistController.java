@@ -1,8 +1,10 @@
 package it.uniroma3.siw.controller;
 
+import it.uniroma3.siw.controller.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.model.Artist;
 import it.uniroma3.siw.service.ArtistService;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.Objects;
 
 @Controller
 public class ArtistController {
@@ -68,6 +74,20 @@ public class ArtistController {
 	public String searchNews(Model model, @RequestParam String name) {
 		model.addAttribute("artists", this.artistService.searchArtistByName(name));
 		return "foundArtists.html";
+	}
+
+	@PostMapping("/admin/saveArtistImage/{id}")
+	public String saveArtistImage(@PathVariable("id") Long id,
+								  @RequestParam("image") MultipartFile multipartFile, Model model) throws IOException {
+		String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
+		Artist artist = artistService.getArtist(id);
+		if(artist == null) return "errors/artistNotFoundError";
+
+		artist.setPicFilename(fileName);
+		artistService.updateArtist(artist);
+		String uploadDir = "src/main/upload/images/artist_pics/" + artist.getId();
+		FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+		return "redirect:/admin/artist/"+ id;
 	}
 	
 }

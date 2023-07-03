@@ -13,38 +13,37 @@
 <body>
 	<div th:replace="fragments/header :: header"></div>
 
-	<h1>Aggiungi un artista</h1>
-	<h2>Può essere un attore, un regista o entrambi è indifferente</h2>
-	<form th:action="@{/admin/artists}" method="POST" th:object="${artist}">
-		<div class="divInForm">
-			<span th:text="${messaggioErrore}">Errore</span>
-		</div>
-		
-		<div class="divInForm">
-			<label>Nome dell'artista:</label> <span><input required type="text" th:field="${artist.name}"/></span>
-		</div>
-		
-		<div class="divInForm">
-			<label>Cognome dell'artista:</label> <span><input required type="text" th:field="${artist.surname}"/></span>
-		</div>
+	<div class="container">
+		<div class="row justify-content-center mt-5">
+			<div class="col-md-6">
+				<h2 class="text-center mb-4">Aggiungi un artista, sia attori che registi</h2>
+				<form th:action="@{/admin/artists}" method="POST" th:object="${artist}">
 
-		<div class="divInForm">
-			<label>Anno di nascita dell'artista "yyyy-MM-dd" :</label> <span><input type="text" th:field="${artist.dateOfBirth}" /></span>
-		</div>
-		
-		<div class="divInForm">
-			<label>Nazionalità dell'artista:</label> <span><input type="text" th:field="${artist.nationality}"  /></span>
-		</div>
-		
-		<!-- <label>Scegli un regista:</label>
-        <select required th:field="${movie.director}">
-            <option th:each="director : ${directors}" th:value="${director.id}" th:text="${director.name} + ' ' + ${director.surname}"></option>
-        </select>  -->
+					<span th:text="${messaggioErrore}">Errore</span>
 
-		<div class="divInForm">
-			<span><button id="submitButton" type="submit">Conferma inserimento</button></span>
+					<div class="mb-3">
+						<label for="name" class="form-label">Nome dell'artista:  </label>
+						<input type="text" class="form-control" id="name" placeholder="Nome ..." required th:field="${artist.name}">
+					</div>
+					<div class="mb-3">
+						<label for="surname" class="form-label">Cognome dell'artista:  </label>
+						<input type="text" class="form-control" id="surname" placeholder="Cognome ..." required th:field="${artist.surname}">
+					</div>
+					<div class="mb-3">
+						<label for="dateOfBirth" class="form-label">Data di nascita: ("yyyy-MM-dd")  </label>
+						<input type="date" class="form-control" id="dateOfBirth" placeholder="Data di nascita ... " required th:field="${artist.dateOfBirth}">
+					</div>
+					<div class="mb-3">
+						<label for="nationality" class="form-label">Nazionalita dell'artista:  </label>
+						<input type="text" class="form-control" id="nationality" placeholder="Nazionalita ..." required th:field="${artist.nationality}">
+					</div>
+
+					<button type="submit" class="btn btn-primary mx-2">Aggiungi</button>
+				</form>
+			</div>
 		</div>
-	</form>
+	</div>
+
 </body>
 
 </html>

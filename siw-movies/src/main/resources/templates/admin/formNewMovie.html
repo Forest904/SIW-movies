@@ -12,39 +12,37 @@
 
 <body>
 	<div th:replace="fragments/header :: header"></div>
-	
-	<h1>Aggiungi un film</h1>
-	<form th:action="@{/admin/movies}" method="POST" th:object="${movie}" enctype="multipart/form-data">
 
-		<div class="divInForm">
-			<span th:text="${messaggioErrore}">Errore</span>
+	<div class="container">
+		<div class="row justify-content-center mt-5">
+			<div class="col-md-6">
+				<h2 class="text-center mb-4">Aggiungi un film</h2>
+				<form th:action="@{/admin/movies}" method="POST" th:object="${movie}">
+
+					<span th:text="${messaggioErrore}">Errore</span>
+
+					<div class="mb-3">
+						<label for="username" class="form-label">Titolo del film: </label>
+						<input type="text" class="form-control" id="username" placeholder="Titolo del film" required th:field="${movie.title}">
+
+					</div>
+					<div class="mb-3">
+						<label for="year" class="form-label">Anno di uscita: </label>
+						<input type="number" class="form-control" id="year" placeholder="Anno di uscita del film" required th:field="${movie.year}">
+
+					</div>
+					<label class="form-label">Scegli un regista:</label>
+					<span th:unless="${directors}"> Non ci sono artisti da poter scegliere</span>
+					<select required th:field="${movie.director}" th:if="${directors}">
+						<option th:each="director : ${directors}" th:value="${director.id}" th:text="${director.name} + ' ' + ${director.surname}"></option>
+					</select>
+
+					<button type="submit" class="btn btn-primary mx-4">Aggiungi</button>
+				</form>
+			</div>
 		</div>
+	</div>
 
-		<div class="errorMessage" th:if="${erroreUpload}" th:text="${erroreUpload}">errore</div>
-		
-		<div class="divInForm">
-			<label>Titolo del film:</label> <span><input required type="text" th:field="${movie.title}" id="titolo"/></span>
-		</div>
-
-		<div class="divInForm">
-			<label>Anno di uscita:</label> <span><input required type="text" th:field="${movie.year}" id="anno"/></span>
-		</div>
-
-		<label>Scegli un regista:</label>
-		<span th:unless="${directors}"> non ci sono artisti da poter scegliere</span>
-		<select required th:field="${movie.director}" th:if="${directors}">
-			<option th:each="director : ${directors}" th:value="${director.id}" th:text="${director.name} + ' ' + ${director.surname}"></option>
-		</select>
-
-		<label class="cursor-pointer text-light" for="modifyImage">
-			<img class="img-fluid my-2 rounded-5 border border-2 border-primary px-0 shadow z-0 hover-dark" th:src= "${globalUser.getPicPath()}"/>
-		</label>
-		<input class="opacity-0 position-absolute" id="modifyImage" name="image" type="file" accept="image/*" onchange="form.submit()">
-		
-		<div class="divInForm">
-			<span><button id="submitButton" type="submit">Conferma inserimento</button></span>
-		</div>
-	</form>
 </body>
 
 </html>

@@ -11,25 +11,27 @@
 
 	<div th:replace="fragments/header :: header"></div>
 
-		<h1>Consulta l'archivio di artisti</h1>
+	<div class="container">
 
-	<section>
-		<form action="/artists" class = central_buttons_section>
-			<button onclick=""  class="button"> Mostra tutti gli artisti </button>
-		</form>
-		
-		<form action="/formSearchArtists" class = central_buttons_section>
-			<button onclick=""  class="button"> Cerca artista per nome </button>
-		</form>
-	</section>
-		
-		<h1>Operazioni per amministratore</h1>
+		<h1 class="m-4">Consulta l'archivio di artisti</h1>
 
-	<section>
-		<form action="/admin/formNewArtist" class = central_buttons_section>
-			<button onclick=""  class="button"> Inserisci un artista </button>
-		</form>
-	</section>
+		<section>
+			<form action="/artists" class = central_buttons_section>
+				<button onclick=""  class="button"> Mostra tutti gli artisti </button>
+			</form>
 
+			<form action="/formSearchArtists" class = central_buttons_section>
+				<button onclick=""  class="button"> Cerca artista per nome </button>
+			</form>
+		</section>
+
+		<h1 class="m-4">Operazioni per amministratore</h1>
+
+		<section>
+			<form action="/admin/formNewArtist" class = central_buttons_section>
+				<button onclick=""  class="button"> Inserisci un artista </button>
+			</form>
+		</section>
+	</div>
 </body>
 </html>

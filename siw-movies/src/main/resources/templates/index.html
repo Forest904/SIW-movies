@@ -11,30 +11,18 @@
 	<body>
 	<div th:replace="fragments/header :: header"></div>
 
-	<h1>Benvenuto nel progetto di S.I.W.</h1>
-	<h2>Ecco le categorie di operazioni attualmente in funzione:</h2>
 
-	<div class="container">
+
+	<div class="container ">
+
+		<h1 class="my-3">Benvenuto nel progetto di S.I.W.</h1>
+		<h2 class="my-3">Ecco i database attualmente in funzione:</h2>
+
 		<div class="d-flex flex-column align-items-center my-4">
 			<button class="btn btn-primary my-4" onclick="location.href='/operazioniMovies'" style="min-width: 200px" >Movies DB</button>
 			<button class="btn btn-primary my-4" onclick="location.href='/operazioniArtists'" style="min-width: 200px" >Artists DB</button>
 		</div>
 	</div>
-	<!--
-        <section >
-            <div>
-                <form action="/operazioniMovies" >
-                    <button onclick=""  class="button"> Operazioni su movies </button>
-                </form>
 
-                <form action="/operazioniArtists">
-                    <button onclick=""  class="button"> Operazioni su artisti </button>
-                </form>
-
-
-            </div>
-
-        </section>
-        -->
 	</body>
 </html>

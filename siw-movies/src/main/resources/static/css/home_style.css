@@ -6,25 +6,6 @@ body {
 }
 
 
-
-img.align-center {
-  display: block;
-  margin: 0px auto;
-}
-
-div.divInForm{
-	margin: 15px;
-}
-
-h1{
-	text-align: center;
-	font-size: 48px;
-}
-
-h2{
-	font-size: 24px;
-}
-
 section{
 	display: flex;
     justify-content: center;
@@ -54,33 +35,6 @@ section{
 
 
 
-.container {
-    display: flex;
-    flex-direction: column;
-    row-gap: 2rem;
-}
-
-
-.carousel {
-    display: flex;
-    overflow-x: scroll;
-    padding-bottom: 1rem;
-    border: 5px solid white;
-    border-radius: 8px;
-}
-
-/* the carousel has to be 100% width but every element has to be clamp(150px, 15vw, 300px), flex basis is great*/
-.carousel > span {
-    flex-basis: clamp(150px, 15vw, 300px);
-}
-
-
-.emptyList {
-    color: white;
-    font-size: 1.5rem;
-    margin: 1.5rem;
-}
-
 .card-info {
     color: white;
     font-size: 1rem;
@@ -90,12 +44,6 @@ section{
     padding: 0 1.5rem;
 }
 
-#movie-year {
-    font-size: .8rem;
-    color: #ccc;
-    margin-top: -1rem;
-    font-weight: normal;
-}
 
 .card {
     width: clamp(150px, 15vw, 300px);
@@ -112,14 +60,4 @@ section{
     transition: all ease-in-out 300ms;
 }
 
-.carousel-title {
-    color: white;
-    margin: 0 1.5rem;
-    font-size: 3.5rem;
-}
 
-.carousel-header {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-}

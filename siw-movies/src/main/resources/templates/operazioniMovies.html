@@ -10,17 +10,21 @@
 <body>
 	<div th:replace="fragments/header :: header"></div>
 
+	<div class="container">
+
 		<h1 class="m-4">Operazioni su Film: </h1>
 
-	<section>
-		<form action="/movies" class = central_buttons_section>
-			<button onclick=""  class="button"> Mostra tutti i film </button>
-		</form>
-			
-		<form action="/formSearchMovies" class = central_buttons_section>
-			<button onclick=""  class="button"> Cerca film per anno </button>
-		</form>
-	</section>
+		<section>
+			<form action="/movies" class = central_buttons_section>
+				<button onclick=""  class="button"> Mostra tutti i film </button>
+			</form>
+
+			<form action="/formSearchMovies" class = central_buttons_section>
+				<button onclick=""  class="button"> Cerca film per anno </button>
+			</form>
+		</section>
+	</div>
+
 
 </body>
 </html>

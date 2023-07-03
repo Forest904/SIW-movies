@@ -11,12 +11,15 @@
 </head>
 
 <body>
-<div th:replace="fragments/header :: header"></div>
+<div th:replace="/fragments/header :: header"></div>
 
-<h1>Benvenuto nel progetto di S.I.W.</h1>
-<h2>Ecco le categorie di operazioni attualmente in funzione:</h2>
+
 
 <div class="container">
+
+	<h1 class="my-3">Benvenuto nel progetto di S.I.W.</h1>
+	<h2 class="my-3">Ecco i database attualmente in funzione:</h2>
+
 	<div class="d-flex flex-column align-items-center my-4">
 		<button class="btn btn-primary my-4" onclick="location.href='/admin/operazioniMoviesAdmin'" style="min-width: 200px" >Movies DB</button>
 		<button class="btn btn-primary my-4"  onclick="location.href='/admin/operazioniArtistsAdmin'" style="min-width: 200px" >Artists DB</button>

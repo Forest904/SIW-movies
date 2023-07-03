@@ -10,15 +10,20 @@
 <body>
 	<div th:replace="fragments/header :: header"></div>
 
-		<h2>Operazioni su Artisti: </h2>
+	<div class="container">
 
-		<form action="/artists" class = central_buttons_section>
-			<button onclick=""  class="button"> Mostra tutti i gli artisti </button>
-		</form>
-			
-		<form action="/formSearchArtists" class = central_buttons_section>
-			<button onclick=""  class="button"> Cerca artista per nome </button>
-		</form>
+		<h1 class="m-4">Operazioni su Artisti: </h1>
+
+		<section>
+			<form action="/artists" class = central_buttons_section>
+				<button onclick=""  class="button"> Mostra tutti i gli artisti </button>
+			</form>
+
+			<form action="/formSearchArtists" class = central_buttons_section>
+				<button onclick=""  class="button"> Cerca artista per nome </button>
+			</form>
+		</section>
+	</div>
 
 </body>
 </html>

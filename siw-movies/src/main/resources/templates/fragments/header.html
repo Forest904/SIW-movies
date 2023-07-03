@@ -39,10 +39,13 @@
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="/stocks">Movies</a>
+                    <a class="nav-link " href="/movies">Movies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="/artists">Artists</a>
                 </li>
                 <li class="nav-item" th:if="${userAuthDetails}">
-                    <a class="nav-link" href="/profile">Profile</a>
+                    <a class="nav-link" href="/registered/profile">Profile</a>
                 </li>
             </ul>
         </div>
@@ -56,7 +59,7 @@
                     <span class="d-inline-block text-light" th:text="${userAuthDetails.username}">username</span>
                 </a>
                 <ul class="dropdown-menu text-small shadow" style="">
-                    <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                    <li><a class="dropdown-item" href="/registered/profile">Profile</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="/logout">Sign out</a></li>
                 </ul>
