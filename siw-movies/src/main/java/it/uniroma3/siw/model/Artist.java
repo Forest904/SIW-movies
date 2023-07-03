@@ -44,6 +44,12 @@ public class Artist {
         return Objects.equals(name, artist.name) && Objects.equals(surname, artist.surname) && Objects.equals(nationality, artist.nationality) && Objects.equals(dateOfBirth, artist.dateOfBirth);
     }
 
+    public String getPicPath(){
+        if(picFilename != null) return "/upload/images/artist_pics/" + this.getId() + "/"
+                +this.getPicFilename();
+        return "/images/default_artist_pic.png";
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(name, surname, nationality, dateOfBirth);

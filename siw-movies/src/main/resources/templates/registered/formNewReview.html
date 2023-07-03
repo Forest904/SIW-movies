@@ -3,9 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>New review</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/home_style.css" />
 </head>
 <body>
     <div th:replace="fragments/header :: header"></div>
+
+    <main class="form-lr  m-auto" style="max-width: 500px">
+        <form th:action="@{'/registered/review/' +${movie_id}}" method="POST" th:object="${review}">
+            <h1 class="h3 my-3  text-light text-center">Aggiungi recensione: </h1>
+            <div>
+                <p th:if = "${#fields.hasGlobalErrors()}" th:each = "err : ${#fields.globalErrors()}" th:text="${err}"></p>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="my-3 form-control text-dark" required id="floatingInputTitle" placeholder="title"
+                       th:field="${review.title}"><span th:if="${#fields.hasErrors('title')}" th:errors="${review.title}" th:style="'color:red'"></span>
+                <label for="floatingInputTitle">Title</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="my-3 form-control text-dark" id="floatingInputContent" placeholder="Content"
+                       th:field="${review.content}"><span th:if="${#fields.hasErrors('content')}" th:errors="${review.content}" th:style="'color:red'"></span>
+                <label for="floatingInputContent">Content</label>
+            </div>
+            <div class="form-floating">
+                <input type="number" class="my-3 form-control text-secondary" required id="floatingInputScore" placeholder="Score"
+                       th:field="${review.score}"><span th:if="${#fields.hasErrors('score')}" th:errors="${review.score}" th:style="'color:red'"></span>
+                <label for="floatingInputScore">Score (-/100) </label>
+            </div>
+            <button class="btn btn-outline-light w-100 py-2 my-3" type="submit">Confirm</button>
+        </form>
+    </main>
 
 </body>
 </html>

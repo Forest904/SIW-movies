@@ -87,7 +87,7 @@ public class ArtistController {
 		artistService.updateArtist(artist);
 		String uploadDir = "src/main/upload/images/artist_pics/" + artist.getId();
 		FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-		return "redirect:/admin/artist/"+ id;
+		return "redirect:artists/"+ id;
 	}
 	
 }

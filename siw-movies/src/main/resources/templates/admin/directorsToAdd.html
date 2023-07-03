@@ -9,15 +9,27 @@
 </head>
 <body>
 	<div th:replace="fragments/header :: header"></div>
-	
-<h1 th:text="'Scegli un regista per ' + ${movie.title}">Scegli un solo regista per il film</h1>
-<div th:if="${directors.isEmpty()}">Non ci sono artisti nel sistema</div>
-<div>
-    <div th:each="director : ${directors}">
-        <a 	th:href="@{'/admin/addDirectorToMovie' + '/' + ${movie.id} + '/' + ${director.id}}" 
-        	th:text="${director.name} + ' ' + ${director.surname} +  ' (' + ${director.dateOfBirth} + ')'">Pete Docter (1965)
-        </a>
+
+    <div class="container">
+
+        <h1 th:text="'Scegli un regista per ' + ${movie.title}">Scegli un regista per il film</h1>
+
+        <div class="emptyList" th:if="${directors.isEmpty()}">Non c'è ancora nessun regista da poter scegliere</div>
+        <div class="row">
+
+            <div class="col-md-3" th:each="director : ${directors}" th:unless="${directors.isEmpty()}">
+                <div class="card" >
+                    <a th:href="@{'/admin/addDirectorToMovie' + '/' + ${movie.id} + '/' + ${director.id}}">
+                        <img class="" width="100%"  alt="image" th:src= "${director.getPicPath()}"/>
+                        <div class="card-body">
+                            <h5 th:text="${director.name} + ' ' + ${director.surname}">Dino Risi </h5>
+                            <p class="card-text" th:text="${director.dateOfBirth}">yyyy-MM-dd</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+
 </body>
 </html>

@@ -9,7 +9,42 @@
 
 <body>
     <div th:replace="fragments/header :: header"></div>
-	
+
+    <div class="container my-3" th:if="${movie}">
+        <div class="row">
+            <h1>Modifica film: </h1>
+
+            <!-- Colonna locandina -->
+            <div class="col-md-3">
+                <form class="" th:action="@{'/admin/saveMovieImage/'+${movie.id}}" method="POST" enctype="multipart/form-data">
+                    <label class="cursor-pointer text-light" for="modifyImage">
+                        <img class="img-fluid my-2 rounded-5 border border-2 border-primary px-0"
+                             th:src= "${movie.getPicPath()}"/>
+                    </label>
+                    <input class="opacity-0" id="modifyImage" name="image" type="file" accept="image/*" onchange="form.submit()">
+                </form>
+            </div>
+
+            <!--Colonna info film-->
+            <div class="col-md-4 my-3">
+                <h2 th:text="${movie.title} + ' (' + ${movie.year} + ')'">Up (2009) </h2>
+
+                <!--Sezione regista -->
+                <div th:if="${movie.director}">
+                    <h3  th:text="'Regista:  ' + ${movie.director.name} + ' ' + ${movie.director.surname} +  ' (' + ${movie.director.dateOfBirth} + ')    '">Regista: Pete Docter (1965)</h3>
+                    <a th:href="@{'/admin/directorsToAdd' + '/' + ${movie.id}}">Cambia regista</a>
+                </div>
+                <h3 th:unless="${movie.director}"> Regista: mancante <a th:href="@{'/admin/directorsToAdd' + '/' + ${movie.id}}">Aggiungi regista</a></h3>
+
+                <!--Sezione attori-->
+                <h2>Cast del film:<a th:href="@{'/admin/allActorsForMovie' + '/' + ${movie.id}}"><em>Modifica</em></a></h2>
+            </div>
+
+        </div>
+    </div>
+    <h2 th:unless="${movie}">Il film selezionato non esiste ergo non puo essere modificato</h2>
+
+    <!--
     <h1>Modifica film </h1>
     <div th:text="${movie.title} + ' (' + ${movie.year} + ')'">Up (2009)</div>
     <div th:if="${movie.director}">
@@ -19,5 +54,6 @@
     <div th:unless="${movie.director}"> Regista: mancante <a th:href="@{'/admin/directorsToAdd' + '/' + ${movie.id}}">Aggiungi regista</a></div>
     
     <div>Attori: <a th:href="@{'/admin/allActorsForMovie' + '/' + ${movie.id}}"><em>Modifica</em></a></div>
+    -->
   </body>
 </html>

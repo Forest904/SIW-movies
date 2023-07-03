@@ -14,7 +14,7 @@ public class User {
 	private String surname;
 	private String email;
 
-	@Column(nullable = true, length = 64)
+	@Column(nullable = true)
 	private String picFilename;
 
 	@ManyToMany(cascade = CascadeType.ALL)

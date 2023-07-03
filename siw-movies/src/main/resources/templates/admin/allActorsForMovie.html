@@ -9,25 +9,43 @@
 </head>
 <body>
 	<div th:replace="fragments/header :: header"></div>
-	
-  	<h1 th:text="'Scegli attori da aggiungere o rimuovere per il film: ' + ${movie.title}">Attori per film ...</h1>
-  	<ul>
-   		<h2><em>Attori presenti nel film:</em></h2>
-    	<li th:each="actor : ${inMovieActors}">
-      <span  th:text="${actor.name} + ' ' + ${actor.surname} + ':   -   '">Pete Docter</span>
-      <a  th:href="@{'/admin/removeActorFromMovie' + '/' + ${movie.id} + '/' + ${actor.id}}"><em>Rimuovi</em></a>
-    	</li>
-  </ul>
-  <ul>
-      <h2><em>Attori non presenti nel film:</em></h2>
-      <li th:each="actor : ${notInMovieActors}">
-          <span th:text="${actor.name} + ' ' + ${actor.surname} + ':   -   '">Pete Docter</span>
-          <a th:href="@{'/admin/addActorInMovie' + '/' + ${movie.id} + '/' + ${actor.id}}"><em>Aggiungi</em></a>
-      </li>
-  </ul>
-  
-  	<form action="/admin/gestisciMovies" class = central_buttons_section>
-		<button onclick=""  class="button"> Conferma cast</button>
-	</form>
+
+
+
+    <div class="container">
+        <h1 class="my-3" th:text="'Scegli attori da aggiungere o rimuovere per il film: ' + ${movie.title}">Attori per film ...</h1>
+        <h2>Attori presenti nel film:</h2>
+
+        <div class="row">
+            <div class="col-md-3" th:each="actor : ${inMovieActors}" th:unless="${inMovieActors.isEmpty()}">
+                <div class="card" >
+                    <a th:href="@{'/admin/removeActorFromMovie' + '/' + ${movie.id} + '/' + ${actor.id}}">
+                        <img class="" width="100%"  alt="image" th:src= "${actor.getPicPath()}"/>
+                        <div class="card-body">
+                            <h5 th:text="${actor.name} + ' ' + ${actor.surname}">Dino Risi </h5>
+                            <p class="card-text" th:text="${actor.dateOfBirth}">yyyy-MM-dd</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <h2>Attori assenti dal film:</h2>
+
+        <div class="row">
+            <div class="col-md-3" th:each="actor : ${notInMovieActors}" th:unless="${notInMovieActors.isEmpty()}">
+                <div class="card" >
+                    <a th:href="@{'/admin/addActorInMovie' + '/' + ${movie.id} + '/' + ${actor.id}}">
+                        <img class="" width="100%"  alt="image" th:src= "${actor.getPicPath()}"/>
+                        <div class="card-body">
+                            <h5 th:text="${actor.name} + ' ' + ${actor.surname}">Dino Risi </h5>
+                            <p class="card-text" th:text="${actor.dateOfBirth}">yyyy-MM-dd</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

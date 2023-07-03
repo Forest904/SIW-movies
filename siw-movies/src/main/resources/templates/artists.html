@@ -21,7 +21,7 @@
 			<div class="col-md-3" th:each="artist : ${artists}" th:unless="${artists.isEmpty()}">
 				<div class="card" >
 					<a th:href="@{'/artists' + '/' + ${artist.id}}">
-						<img class="" width="100%"  alt="image" src="https://pad.mymovies.it/filmclub/2006/04/020/locandina.jpg"/>
+						<img class="" width="100%"  alt="image" th:src= "${artist.getPicPath()}"/>
 						<div class="card-body">
 							<h5 th:text="${artist.name} + ' ' + ${artist.surname}">Dino Risi </h5>
 							<p class="card-text" th:text="${artist.dateOfBirth}">yyyy-MM-dd</p>

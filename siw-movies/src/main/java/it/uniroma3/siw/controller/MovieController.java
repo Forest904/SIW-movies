@@ -204,7 +204,7 @@ public class MovieController {
         return "admin/formUpdateMovies.html";
     }
 
-    @PostMapping("/saveMovieImage/{id}")
+    @PostMapping("/admin/saveMovieImage/{id}")
     public String saveMovieImage(@PathVariable("id") Long id,
                                  @RequestParam("image") MultipartFile multipartFile, Model model) throws IOException {
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
@@ -215,7 +215,7 @@ public class MovieController {
         movieService.updateMovie(movie);
         String uploadDir = "src/main/upload/images/movie_pics/" + movie.getId();
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-        return "redirect:/movie/"+ id;
+        return "redirect:/movies/"+ id;
     }
 
 }

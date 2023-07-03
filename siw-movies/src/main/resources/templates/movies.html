@@ -21,10 +21,11 @@
 			<div class="col-md-3" th:each="movie : ${movies}" th:unless="${movies.isEmpty()}" th:data-title="${movie.title}">
 					<div class="card" >
 						<a th:href="@{'/movies/' + ${movie.id}}">
-							<img class="" width="100%"  alt="image" src="https://pad.mymovies.it/filmclub/2006/04/020/locandina.jpg"/>
+							<img class="img-fluid"   alt="image"  th:src= "${movie.getPicPath()}"/>
 							<div class="card-body">
 								<h5 class="card-title" th:text="${movie.title}">Up </h5>
 								<p class="card-text" th:text="${movie.year}">2001</p>
+								<p class="badge bg-primary rounded-pill align-self-center" th:text="${movie.getAvgReviews()} + '/100'">score</p>
 							</div>
 						</a>
 					</div>
@@ -33,7 +34,7 @@
 	</div>
 
 
-	<!-- th:src="'/upload/images/moviesImages/' + ${movie.picFileName}" -->
+	<!-- th:src= "${movie.getPicPath()}" -->
 
 </body>
 

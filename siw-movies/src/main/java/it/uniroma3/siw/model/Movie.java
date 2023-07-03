@@ -24,9 +24,7 @@ public class Movie {
     @Max(2023)
 	private Integer year;
 
-
-
-	@Column(nullable = true, length = 64)
+	@Column(nullable = true)
 	private String picFilename;
 	
 	@ManyToOne(cascade = {CascadeType.ALL})
@@ -47,7 +45,7 @@ public class Movie {
 	public String getPicPath(){
 		if(picFilename != null) return "/upload/images/movie_pics/" + this.getId() + "/"
 				+this.getPicFilename();
-		return "/images/default_profile_pic.png";
+		return "/images/default_movie_pic.png";
 	}
 
 	public Long getId() {

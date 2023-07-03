@@ -46,7 +46,7 @@ public class ReviewController {
             review.setCreationDateTime(LocalDateTime.now());
             this.reviewService.save(review);
             model.addAttribute("review", review);
-            return "redirect:/movie/" + movie_id;
+            return "redirect:/movies/" + movie_id;
         }else{
             return "registered/formNewReview";
         }
@@ -59,7 +59,7 @@ public class ReviewController {
             return "errors/reviewNotFoundError";
         Movie movie = review.getReviewedMovie();
         reviewService.remove(review);
-        return "redirect:/movie/"+movie.getId();
+        return "redirect:/movies/"+movie.getId();
     }
     //########### ADMIN #################
     @GetMapping("/admin/removeReview/{review_id}")
@@ -69,6 +69,6 @@ public class ReviewController {
 
         Movie movie = review.getReviewedMovie();
         reviewService.remove(review);
-        return "redirect:/admin/movie/"+movie.getId();
+        return "redirect:/movies/"+movie.getId();
     }
 }

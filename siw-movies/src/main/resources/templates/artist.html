@@ -17,8 +17,7 @@
             <div class="col-md-3">
                 <form class="" th:action="@{'/admin/saveArtistImage/'+${artist.id}}" method="POST" enctype="multipart/form-data">
                     <label class="cursor-pointer text-light" for="modifyImage">
-                        <img class="img-fluid my-2 rounded-5 border border-2 border-primary px-0"
-                             src="https://pad.mymovies.it/filmclub/2006/04/020/locandina.jpg"/>
+                        <img class="img-fluid my-2 rounded-5 border border-2 border-primary px-0"  th:src= "${artist.getPicPath()}"/>
                     </label>
                     <input class="opacity-0" id="modifyImage" name="image" type="file" accept="image/*" onchange="form.submit()">
                 </form>
@@ -34,7 +33,7 @@
     </div>
     <div th:unless="${artist}">Artista non nel sistema</div>
 
-    <!-- <img class="img-fluid my-2 rounded-5 border border-2 border-primary px-0" th:src= "${movie.getPicPath()}"/> -->
+    <!-- <img class="img-fluid my-2 rounded-5 border border-2 border-primary px-0" th:src= "${artist.getPicPath()}"/> -->
 
   </body>
 </html>
