@@ -47,7 +47,7 @@ public class Artist {
     public String getPicPath(){
         if(picFilename != null) return "/upload/images/artist_pics/" + this.getId() + "/"
                 +this.getPicFilename();
-        return "/images/default_artist_pic.png";
+        return "/images/default_profile_pic.png";
     }
 
     @Override

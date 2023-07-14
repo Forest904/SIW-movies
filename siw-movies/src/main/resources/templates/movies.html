@@ -15,7 +15,7 @@
 
 		<h1 class="my-2">Archivio film</h1>
 
-		<div class="emptyList" th:if="${movies.isEmpty()}">Non c'è ancora nessun film</div>
+		<div class="emptyList" th:if="${movies.isEmpty()}">Archivio film  ancora vuoto</div>
 		<div class="row">
 
 			<div class="col-md-3" th:each="movie : ${movies}" th:unless="${movies.isEmpty()}" th:data-title="${movie.title}">

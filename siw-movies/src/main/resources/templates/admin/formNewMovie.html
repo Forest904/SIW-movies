@@ -31,11 +31,11 @@
 						<input type="number" class="form-control" id="year" placeholder="Anno di uscita del film" required th:field="${movie.year}">
 
 					</div>
-					<label class="form-label">Scegli un regista:</label>
-					<span th:unless="${directors}"> Non ci sono artisti da poter scegliere</span>
+					<!--<label class="form-label">Scegli un regista:</label>
+					<span th:unless="${directors}"> Non ci sono registi da poter scegliere</span>
 					<select required th:field="${movie.director}" th:if="${directors}">
 						<option th:each="director : ${directors}" th:value="${director.id}" th:text="${director.name} + ' ' + ${director.surname}"></option>
-					</select>
+					</select>-->
 
 					<button type="submit" class="btn btn-primary mx-4">Aggiungi</button>
 				</form>

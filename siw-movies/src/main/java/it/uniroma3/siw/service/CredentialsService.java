@@ -33,8 +33,13 @@ public class CredentialsService {
 		
     @Transactional
     public Credentials saveCredentials(Credentials credentials) {
-        credentials.setRole(Credentials.ADMIN_ROLE);
+        credentials.setRole(Credentials.DEFAULT_ROLE);
         credentials.setPassword(this.passwordEncoder.encode(credentials.getPassword()));
         return this.credentialsRepository.save(credentials);
     }
+
+	@Transactional
+	public boolean alreadyExistsUsername(String username){
+		return credentialsRepository.existsByUsername(username);
+	}
 }

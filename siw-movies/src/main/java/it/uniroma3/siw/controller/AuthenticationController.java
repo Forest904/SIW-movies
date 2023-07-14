@@ -2,6 +2,9 @@ package it.uniroma3.siw.controller;
 
 import javax.validation.Valid;
 
+import it.uniroma3.siw.service.UserService;
+import it.uniroma3.siw.validator.CredentialsValidator;
+import it.uniroma3.siw.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,9 +23,15 @@ import it.uniroma3.siw.service.CredentialsService;
 
 @Controller
 public class AuthenticationController {
-	
+
+	@Autowired
+	private CredentialsValidator credentialsValidator;
 	@Autowired
 	private CredentialsService credentialsService;
+	@Autowired
+	private UserValidator userValidator;
+	@Autowired
+	private UserService userService;
 	
 	@GetMapping(value = "/register") 
 	public String showRegisterForm (Model model) {
@@ -64,19 +73,25 @@ public class AuthenticationController {
     }
 
 	@PostMapping(value = { "/register" })
-    public String registerUser(@Valid @ModelAttribute("user") User user,
-                 BindingResult userBindingResult, @Valid
-                 @ModelAttribute("credentials") Credentials credentials,
-                 BindingResult credentialsBindingResult,
-                 Model model) {
+    public String registerUser(		@Valid @ModelAttribute("user") User user,
+                 					BindingResult userBindingResult,
+								   	@Valid @ModelAttribute("credentials") Credentials credentials,
+                 					BindingResult credentialsBindingResult,
+                 					Model model) {
 
+		//valida se ci sono untenti con stesso name surname e email
+		userValidator.validate(user, userBindingResult);
+		//valida se ci sono username uguali
+		credentialsValidator.validate(credentials, credentialsBindingResult);
         // se user e credential hanno entrambi contenuti validi, memorizza User e the Credentials nel DB
         if(!userBindingResult.hasErrors() && ! credentialsBindingResult.hasErrors()) {
+			userService.saveUser(user);
             credentials.setUser(user);
             credentialsService.saveCredentials(credentials);
             model.addAttribute("user", user);
             return "registrationSuccessful";
         }
-        return "registerUser";
+		model.addAttribute("messaggioErrore", "Questo username esiste già, inseriscine uno nuovo o effettua il login  :)");
+        return showRegisterForm(model);
     }
 }
